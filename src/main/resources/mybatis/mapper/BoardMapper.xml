@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vue.demo.dao.BoardDAO"> 
+
+	<!-- 게시글 조회 -->
+	<select id="boardList" resultType="BoardDTO"> 
+	
+		select * from board order by bno desc; 
+	
+	</select> 
+	
+	<!-- 상세 조회 -->
+	<select id="boardDetail" resultType="BoardDTO">
+	
+		select * from board where bno = #{bno}
+	
+	</select>
+	
+	<!-- 등록 -->
+	<insert id="boardEnroll">
+	
+		insert into board (title, content, writer, regDate, updateDate)
+		values (#{title}, #{content}, #{writer}, now(), now());
+	
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="boardUpdate">
+		
+		update board set title = #{title}, content=#{content}, writer=#{writer}, updatedate=now() where bno=#{bno};
+	
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="boardDelete">
+	
+		delete from board where bno = #{bno}
+		
+	</delete>
+</mapper>
